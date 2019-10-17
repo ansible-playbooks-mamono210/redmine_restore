@@ -1,0 +1,10 @@
+- hosts: all
+  vars_files:
+    - vars/default.yml
+  become: True
+
+  roles:
+    - unfreeze
+    - git
+    - files
+    - database

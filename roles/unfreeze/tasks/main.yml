@@ -1,0 +1,5 @@
+- name: Unarchive Redmine backup data file
+  unarchive:
+    src: '{{ backup_data_path }}'
+    dest: '{{ working_dir }}'
+    remote_src: yes

@@ -1,0 +1,31 @@
+# Redmine restore vars
+
+#---------------------------------------------
+# Db user
+db_user: redmine
+# Db password
+db_password: password
+# Db name:
+db_name: redmine
+#---------------------------------------------
+
+# Redime installed dictory
+redmine_dir: /var/lib/redmine
+
+# Working directory
+working_dir: /tmp/s3
+
+# Path to Redmine backup data
+backup_data_path: /tmp/s3/redmine-backup.tar.gz
+
+# Restore working directory
+backup_data_dir: "{{ working_dir }}/redmine-backup"
+
+# Redmine database dump data file name
+pg_dump_file: redmine.psql
+
+# Redmine media files archive file name
+media_file: files.tar.gz
+
+# Git repository data file name
+git_archive_file: git.tar.gz
