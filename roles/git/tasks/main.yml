@@ -15,3 +15,11 @@
     group: git
     mode: 0755
     remote_src: yes
+
+- name: Change owner and group of git repository directory
+  file:
+    path: /var/git
+    owner: git
+    group: git
+    mode: 0755
+    recurse: yes

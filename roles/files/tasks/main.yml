@@ -11,3 +11,11 @@
     group: apache
     mode: 0755
     remote_src: yes
+
+- name: Change owner and group of files directory
+  file:
+    path: "{{ redmine_dir }}/files"
+    owner: apache
+    group: apache
+    mode: 0755
+    recurse: yes
