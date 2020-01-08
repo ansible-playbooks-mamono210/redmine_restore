@@ -43,6 +43,28 @@
   shell:
     "psql -h localhost -U {{ db_user }} {{ db_name }} < {{ backup_data_dir }}/{{ pg_dump_file }}"
 
+- name: Update gem packages
+  command: bundle update
+  args:
+    chdir: '{{ redmine_dir }}'
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+
+- name: Create secret token
+  command: bundle exec rake generate_secret_token
+  args:
+    chdir: '{{ redmine_dir }}'
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+    RAILS_ENV: production
+
+- name: Execute database migration
+  command: bin/rake db:migrate
+  args:
+    chdir: '{{ redmine_dir }}'
+  environment:
+    RAILS_ENV: production
+
 - name: Restart httpd
   service:
     name: httpd
