@@ -1,3 +1,4 @@
+---
 - name: Restart postgresql.service
   service:
     name: postgresql

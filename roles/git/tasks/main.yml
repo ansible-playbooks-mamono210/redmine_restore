@@ -1,3 +1,4 @@
+---
 - name: Create user 'git' / git controlling account
   user:
     name: git

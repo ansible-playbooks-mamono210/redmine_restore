@@ -1,3 +1,4 @@
+---
 - name: Delete exisiting Redmine media directory
   file:
     path: "{{ redmine_dir }}/files"
