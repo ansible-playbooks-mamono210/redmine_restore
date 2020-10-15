@@ -8,7 +8,8 @@ rules:
   braces:
     level: error
     ignore: |
-      molecule/default/create.yml
+      molecule/redmine/create.yml
+      molecule/redmica/create.yml
   brackets: enable
   colons: enable
   commas: enable
@@ -29,9 +30,12 @@ rules:
     level: error
     ignore: |
        install.yml
-       molecule/default/create.yml
-       molecule/default/destroy.yml
-       molecule/default/prepare.yml
+       molecule/redmine/create.yml
+       molecule/redmine/destroy.yml
+       molecule/redmine/prepare.yml
+       molecule/redmica/create.yml
+       molecule/redmica/destroy.yml
+       molecule/redmica/prepare.yml
        roles/database/tasks/main.yml
   new-line-at-end-of-file: enable
   new-lines: enable
