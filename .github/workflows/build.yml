@@ -48,6 +48,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
+      - name: Create environment variables with timestamp for making sure Molecule would create unique AWS resources
+        run: |
+          TIMESTAMP=$(date --date "9 hours" "+%Y-%m-%d_%H:%M:%S")
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+
       - name: Test with molecule
         run: |
           molecule test --scenario-name ${{ matrix.scenario }}
@@ -61,6 +66,7 @@ jobs:
           EC2_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
+          # TIMESTAMP: sotred in system environment variables
 
       - name: Show Ansible version
         run: ansible --version

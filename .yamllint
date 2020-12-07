@@ -30,6 +30,7 @@ rules:
     level: error
     ignore: |
        install.yml
+       .github/workflows/build.yml
        molecule/redmine/create.yml
        molecule/redmine/destroy.yml
        molecule/redmine/prepare.yml
