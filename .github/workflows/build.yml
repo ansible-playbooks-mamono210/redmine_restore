@@ -45,8 +45,8 @@ jobs:
           echo "AMI_ID=${AMI_ID}" >> $GITHUB_ENV
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Create environment variables with timestamp for making sure Molecule would create unique AWS resources
         run: |
@@ -58,15 +58,18 @@ jobs:
           molecule test --scenario-name ${{ matrix.scenario }}
         env:
           # AMI_ID: sotred in system environment variables
+          ANSIBLE_FORCE_COLOR: '1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
           AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
           AWS_S3_OBJECT_NAME: ${{ secrets.AWS_S3_OBJECT_NAME }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           EC2_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          PROFILE_TASKS_SORT_ORDER: 'none'
+          PROFILE_TASKS_TASK_OUTPUT_LIMIT: '200'
+          TZ: 'Asia/Tokyo'
           PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
           # TIMESTAMP: sotred in system environment variables
+          VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
 
       - name: Show Ansible version
         run: ansible --version
