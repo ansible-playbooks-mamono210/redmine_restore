@@ -1,15 +1,15 @@
 ---
 - name: Create user 'git' / git controlling account
-  user:
+  ansible.builtin.user:
     name: git
 
 - name: Delete existing git repositories
-  file:
+  ansible.builtin.file:
     path: /var/git
     state: absent
 
 - name: Unarchive git repository data file
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ backup_data_dir }}/{{ git_archive_file }}"
     dest: /var
     owner: git
@@ -18,7 +18,7 @@
     remote_src: yes
 
 - name: Change owner and group of git repository directory
-  file:
+  ansible.builtin.file:
     path: /var/git
     owner: git
     group: git

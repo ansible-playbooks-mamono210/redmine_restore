@@ -1,15 +1,12 @@
 ---
 - name: Restart postgresql.service
-  service:
+  ansible.builtin.service:
     name: postgresql
     state: restarted
     enabled: yes
 
 - name: Add privilege escalation to user 'postgres'
-  environment:
-    PATH:
-      "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }} "
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/sudoers.d/postgres
     owner: root
     group: root
@@ -18,18 +15,21 @@
     state: present
     create: yes
     validate: "visudo -cf %s"
+  environment:
+    PATH:
+      "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ ansible_env.PATH }} "
 
 - name: Delete database
   become_user: postgres
   become_method: sudo
-  postgresql_db:
+  community.general.postgresql_db:
     name: '{{ db_name }}'
     state: absent
 
 - name: Create database
   become_user: postgres
   become_method: sudo
-  postgresql_db:
+  community.general.postgresql_db:
     name: '{{ db_name }}'
     encoding: UTF-8
     lc_collate: ja_JP.UTF-8
@@ -39,20 +39,20 @@
 - name: Restore database
   become_user: postgres
   become_method: sudo
+  ansible.builtin.shell:
+    "psql -h localhost -U {{ db_user }} {{ db_name }} < {{ backup_data_dir }}/{{ pg_dump_file }}"
   environment:
     PGPASSWORD: '{{ db_password }}'
-  shell:
-    "psql -h localhost -U {{ db_user }} {{ db_name }} < {{ backup_data_dir }}/{{ pg_dump_file }}"
 
 - name: Update gem packages
-  command: bundle update
+  ansible.builtin.command: bundle update
   args:
     chdir: '{{ redmine_dir }}'
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
 
 - name: Create secret token
-  command: bundle exec rake generate_secret_token
+  ansible.builtin.command: bundle exec rake generate_secret_token
   args:
     chdir: '{{ redmine_dir }}'
   environment:
@@ -60,19 +60,19 @@
     RAILS_ENV: production
 
 - name: Execute database migration
-  command: bin/rake db:migrate
+  ansible.builtin.command: bin/rake db:migrate
   args:
     chdir: '{{ redmine_dir }}'
   environment:
     RAILS_ENV: production
 
 - name: Restart httpd
-  service:
+  ansible.builtin.service:
     name: httpd
     state: restarted
     enabled: yes
 
 - name: Remove privilege escalation from user 'postgres'
-  file:
+  ansible.builtin.file:
     path: /etc/sudoers.d/postgres
     state: absent

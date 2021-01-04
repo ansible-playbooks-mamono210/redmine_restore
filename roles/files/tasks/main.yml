@@ -1,11 +1,11 @@
 ---
 - name: Delete exisiting Redmine media directory
-  file:
+  ansible.builtin.file:
     path: "{{ redmine_dir }}/files"
     state: absent
 
 - name: Unarchive media data files
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ backup_data_dir }}/{{ media_file }}"
     dest: '{{ redmine_dir }}'
     owner: apache
@@ -14,7 +14,7 @@
     remote_src: yes
 
 - name: Change owner and group of files directory
-  file:
+  ansible.builtin.file:
     path: "{{ redmine_dir }}/files"
     owner: apache
     group: apache

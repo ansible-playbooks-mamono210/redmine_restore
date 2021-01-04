@@ -18,14 +18,14 @@
 
   tasks:
     - name: Create working directory
-      file:
+      ansible.builtin.file:
         path: '{{ working_dir }}'
         state: directory
         mode: '0755'
         recurse: yes
 
     - name: Simple GET operation (To transfer AWS credentials infomations to the target system, do not remove 'aws_access_key', 'aws_secret_key', and 'region')
-      aws_s3:
+      amazon.aws.aws_s3:
         aws_access_key: '{{ aws_access_key_id }}'
         aws_secret_key: '{{ aws_secret_access_key }}'
         region: '{{ aws_region }}'
