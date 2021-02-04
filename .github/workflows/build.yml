@@ -35,6 +35,10 @@ jobs:
         run: |
           pip install -r molecule/requirements.txt
 
+      - name: Install required Ansible Collections
+        run: |
+          ansible-galaxy collection install community.molecule
+
       - name: Set latest AMI image id to environment variables
         run: |
           AMI_ID=$(aws ec2 describe-images \
