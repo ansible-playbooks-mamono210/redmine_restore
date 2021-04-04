@@ -54,7 +54,11 @@ jobs:
   molecule:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
+        distro:
+          - centos7
+          - centos8
         scenario:
           - redmine
           - redmica
@@ -79,7 +83,7 @@ jobs:
         run: |
           AMI_ID=$(aws ec2 describe-images \
           --owners "${{ secrets.AMI_OWNER_ID }}" \
-          --filters "Name=name,Values=${{ matrix.scenario }}*" \
+          --filters "Name=name,Values=${{ matrix.scenario }}_golden-image_${{ matrix.distro }}*" \
           --query 'Images[*][CreationDate, ImageId, Name]' \
           --output text | sort -r | awk 'NR==1 {print $2}')
           echo "AMI_ID=${AMI_ID}" >> $GITHUB_ENV
@@ -91,7 +95,8 @@ jobs:
       - name: Create environment variables with timestamp for making sure Molecule would create unique AWS resources
         run: |
           TIMESTAMP=$(date --date "9 hours" "+%Y-%m-%d_%H:%M:%S")
-          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+          TAG="${{ matrix.distro }}-${TIMESTAMP}"
+          echo "TAG=${TAG}" >> $GITHUB_ENV
 
       - name: Test with molecule
         run: |
@@ -108,7 +113,7 @@ jobs:
           PROFILE_TASKS_TASK_OUTPUT_LIMIT: '200'
           TZ: 'Asia/Tokyo'
           PY_COLORS: '1'
-          # TIMESTAMP: sotred in system environment variables
+          # TAG: sotred in system environment variables
           VPC_SUBNET_ID: ${{ secrets.VPC_SUBNET_ID }}
 
       - name: Show Ansible version

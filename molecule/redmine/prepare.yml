@@ -15,6 +15,19 @@
     - role: geerlingguy.repo-epel
       become: True
     - role: geerlingguy.pip
+      vars:
+        pip_package: python3-pip
+        pip_executable: pip3
+      when:
+        - ansible_distribution == "CentOS"
+        - ansible_distribution_major_version == "8"
+    - role: geerlingguy.pip
+      vars:
+        pip_package: python-pip
+        pip_executable: pip
+      when:
+        - ansible_distribution == "CentOS"
+        - ansible_distribution_major_version == "7"
 
   tasks:
     - name: Create working directory

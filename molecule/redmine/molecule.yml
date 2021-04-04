@@ -2,11 +2,11 @@
 driver:
   name: ec2
 platforms:
-  - name: molecule_redmine_restore_${TIMESTAMP}
+  - name: molecule_redmine_restore_${TAG}
     image: ${AMI_ID}
     instance_type: t2.micro
-    keypair_name: molecule_redmine_restore_${TIMESTAMP}
-    security_group_name: molecule_redmine_restore_${TIMESTAMP}
+    keypair_name: molecule_redmine_restore_${TAG}
+    security_group_name: molecule_redmine_restore_${TAG}
     vpc_subnet_id: ${VPC_SUBNET_ID}
 provisioner:
   name: ansible
@@ -20,7 +20,7 @@ provisioner:
     local_file_name: ${AWS_S3_OBJECT_NAME}
     s3_bucket: ${AWS_S3_BUCKET_NAME}
     s3_object_name: ${AWS_S3_OBJECT_NAME}
-  log: false
+  log: true
   playbooks:
     converge: ../../restore.yml
 verifier:
