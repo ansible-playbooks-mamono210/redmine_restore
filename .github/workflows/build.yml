@@ -3,18 +3,6 @@ name: build
 on: [deployment, push]
 
 jobs:
-  ansible-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Ansible lint
-        uses: ansible/ansible-lint-action@master
-        with:
-          targets: |
-            install.yml
-
   detect-secrets:
     runs-on: ubuntu-latest
     steps:
@@ -57,7 +45,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - distro: centos8
+          - distro: centos-stream8
             scenario: redmica
             python_interpreter: /usr/libexec/platform-python
 
