@@ -1,0 +1,7 @@
+---
+parseable: true
+warn_list:
+  - fqcn-builtins
+  - no-changed-when
+  - role-name
+  - yaml
