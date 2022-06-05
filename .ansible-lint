@@ -1,7 +1,12 @@
 ---
 parseable: true
-warn_list:
+warn_list:  # or 'skip_list' to silence them completely
+  - experimental  # all rules tagged as experimental
   - fqcn-builtins
   - no-changed-when
+  - no-handler  # Tasks that run when changed should likely be handlers.
+  - risky-file-permissions  # File permissions unset or incorrect.
   - role-name
+  - schema  # Perform JSON Schema Validation for known lintable kinds.
+  - unnamed-task  # All tasks should be named.
   - yaml
