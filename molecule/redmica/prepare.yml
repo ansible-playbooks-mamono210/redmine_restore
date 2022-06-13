@@ -3,31 +3,10 @@
   become: true
 
   vars:
-    pip_install_packages:
-      - name: pip
-        version: "20.3.4"
-      - name: boto3
-    pip_package: python-pip
-    pip_executable: pip
     working_dir: /tmp/s3
 
   roles:
-    - role: geerlingguy.repo-epel
-      become: True
-    - role: geerlingguy.pip
-      vars:
-        pip_package: python3-pip
-        pip_executable: pip3
-      when:
-        - ansible_distribution == "CentOS"
-        - ansible_distribution_major_version == "8"
-    - role: geerlingguy.pip
-      vars:
-        pip_package: python-pip
-        pip_executable: pip
-      when:
-        - ansible_distribution == "CentOS"
-        - ansible_distribution_major_version == "7"
+    - role: mamono210.aws_s3_bootstrap
 
   tasks:
     - name: Create working directory
