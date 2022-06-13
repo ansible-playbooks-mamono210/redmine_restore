@@ -1,1 +1,1 @@
-[![](https://github.com/ansible-playbooks-centos7/redmine_restore/workflows/build/badge.svg)](https://github.com/ansible-playbooks-centos7/redmine_restore/actions?query=workflow%3Abuild)
+[![CircleCI](https://circleci.com/gh/ansible-playbooks-mamono210/redmine_restore/tree/main.svg?style=svg)](https://circleci.com/gh/ansible-playbooks-mamono210/redmine_restore/tree/main)
