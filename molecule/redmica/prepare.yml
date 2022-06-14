@@ -2,26 +2,6 @@
 - hosts: all
   become: true
 
-  vars:
-    working_dir: /tmp/s3
-
   roles:
     - role: mamono210.aws_s3_bootstrap
-
-  tasks:
-    - name: Create working directory
-      ansible.builtin.file:
-        path: '{{ working_dir }}'
-        state: directory
-        mode: '0755'
-        recurse: yes
-
-    - name: Simple GET operation (To transfer AWS credentials infomations to the target system, do not remove 'aws_access_key', 'aws_secret_key', and 'region')
-      amazon.aws.aws_s3:
-        aws_access_key: '{{ aws_access_key_id }}'
-        aws_secret_key: '{{ aws_secret_access_key }}'
-        region: '{{ aws_region }}'
-        bucket: '{{ s3_bucket }}'
-        object: '{{ s3_object_name }}'
-        dest: "{{ working_dir }}/{{ local_file_name }}"
-        mode: get
+    - role: mamono210.aws_s3_get
