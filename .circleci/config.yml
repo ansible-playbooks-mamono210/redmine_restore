@@ -157,6 +157,6 @@ workflows:
           requires:
             - yamllint
       - molecule:
-          context: aws_oidc
+          context: AWS_OPENID_CONNECT_TOKENS
           requires:
             - ansible-lint
