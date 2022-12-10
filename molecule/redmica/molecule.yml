@@ -4,7 +4,8 @@ driver:
 platforms:
   - name: ${PLATFORM_NAME}
     ansible_user: centos
-    image: ${AMI_ID}
+    image_name: "redmica_golden-image_centos-stream8-1*"
+    image_owner: ${AMI_OWNER_ID}
     instance_type: t3a.medium
     keypair_name: ${KEYPAIR_NAME}
     security_group_name: ${SECURITY_GROUP_NAME}

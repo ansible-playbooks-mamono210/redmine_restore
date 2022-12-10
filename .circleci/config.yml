@@ -52,16 +52,6 @@ jobs:
           role-session-name: circleci_ansible-playbook_redmine_restore
           session-duration: '1800'
       - run:
-          name: Set latest AMI image id to environment variables
-          command: |
-            AMI_ID=$(aws ec2 describe-images \
-            --owners ${AMI_OWNER_ID} \
-            --filters "Name=name,Values=redmica_golden-image_centos-stream8*" \
-            --query 'Images[*][CreationDate, ImageId, Name]' \
-            --output text | sort -r | awk 'NR==1 {print $2}')
-            echo "export AMI_ID=${AMI_ID}" >> $BASH_ENV
-            source $BASH_ENV
-      - run:
           name: Set timestamp for making sure Molecule would create unique AWS resources
           command: |
             TIMESTAMP=$(date --date "9 hours" "+%Y%m%d_%H:%M:%S")
