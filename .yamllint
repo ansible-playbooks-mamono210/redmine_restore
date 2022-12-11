@@ -12,9 +12,6 @@ ignore: |
 rules:
   braces:
     level: error
-    ignore: |
-      molecule/redmine/create.yml
-      molecule/redmica/create.yml
   brackets: enable
   colons: enable
   commas: enable
@@ -34,16 +31,8 @@ rules:
   line-length:
     level: error
     ignore: |
-       install.yml
-       .github/workflows/build.yml
-       molecule/awsiam/converge.yml
-       molecule/redmine/create.yml
-       molecule/redmine/destroy.yml
-       molecule/redmine/prepare.yml
-       molecule/redmica/create.yml
-       molecule/redmica/destroy.yml
-       molecule/redmica/prepare.yml
-       roles/database/tasks/main.yml
+      .circleci/config.yml
+      roles/database/tasks/main.yml
   new-line-at-end-of-file: enable
   new-lines: enable
   octal-values: disable
