@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Restore Redmine
+  hosts: all
   become: True
 
   roles:
