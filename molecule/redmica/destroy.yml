@@ -5,12 +5,8 @@
   gather_facts: false
 
   tasks:
-    - name: Set variables of molecule.yml to molecule_platforms
-      set_fact:
-        molecule_platforms: "{{ molecule_yml.platforms }}"
-
     - name: Execute
       ansible.builtin.include_role:
         name: mamono210.molecule_test_ec2
       vars:
-        resource_state: 'absent'
+        molecule_test_ec2_resource_state: 'absent'
