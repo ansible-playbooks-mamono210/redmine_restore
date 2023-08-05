@@ -14,9 +14,9 @@ platforms:
         from_port: 22
         to_port: 22
         cidr_ip: '0.0.0.0/0'
-      - proto: icmp
-        from_port: 8
-        to_port: -1
+      - proto: tcp
+        from_port: 80
+        to_port: 80
         cidr_ip: '0.0.0.0/0'
     security_group_rules_egress:
       - proto: -1
@@ -36,12 +36,11 @@ provisioner:
       callbacks_enabled: ansible.posix.profile_tasks
   connection_options:
     ansible_user: centos
-    local_file_name: ${AWS_S3_OBJECT_NAME}
-    remote_directory: /tmp/s3
-    remote_file_name: ${AWS_S3_OBJECT_NAME}
-    s3_bucket: ${AWS_S3_BUCKET_NAME}
-    s3_object_name: ${AWS_S3_OBJECT_NAME}
-    working_dir: "{{ remote_directory }}"
+    redmine_archived_git_file: git.tar.gz
+    redmine_pg_dump_file: redmine.psql
+    redmine_archived_media_file: files.tar.gz
+    redmine_backup_data_dir: /tmp/redmine-backup
+    remote_directory: '{{ redmine_backup_data_dir }}'
   log: true
   playbooks:
     converge: ../../restore.yml

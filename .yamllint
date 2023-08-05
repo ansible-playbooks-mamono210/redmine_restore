@@ -32,7 +32,8 @@ rules:
     level: error
     ignore: |
       .circleci/config.yml
-      roles/database/tasks/main.yml
+      molecule/default/prepare.yml
+      roles/requirements.yml
   new-line-at-end-of-file: enable
   new-lines: enable
   octal-values: disable

@@ -1,6 +1,0 @@
----
-- name: Unarchive Redmine backup data file
-  ansible.builtin.unarchive:
-    src: '{{ backup_data_path }}'
-    dest: '{{ working_dir }}'
-    remote_src: yes

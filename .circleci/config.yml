@@ -34,10 +34,7 @@ jobs:
           aws-resource-name: "molecule_redmine_restore"
           aws-vpc-subnet-id: "subnet-022a704b3061b8b39"
           circleci-timeout: "15m"
-          molecule-scenario-name: "redmica"
-        environment:
-        # AWS_S3_BUCKET_NAME: stored in CircleCI environment variables
-        # AWS_S3_OBJECT_NAME: stored in CircleCI environment variables
+          molecule-scenario-name: "default"
   yamllint:
     executor: yamllint/default
     steps:

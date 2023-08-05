@@ -1,31 +1,36 @@
 # Redmine restore vars
 
 #---------------------------------------------
-# Db user
-db_user: redmine
-# Db password
-db_password: password
-# Db name:
-db_name: redmine
+# Host running the database
+redmine_db_host: localhost
+
+# The password to establish the PostgreSQL session
+redmine_db_password: password
+
+# Redmine database name
+redmine_db_name: redmine
+
+# The user name to establish the PostgreSQL session
+redmine_db_user: redmine
 #---------------------------------------------
+
+# Backup data directory
+redmine_backup_data_dir: /tmp/redmine-backup
 
 # Redime installed dictory
 redmine_dir: /var/lib/redmine
 
-# Working directory
-working_dir: /tmp/s3
+# Archived Git data file
+redmine_archived_git_file: git.tar.gz
 
-# Path to Redmine backup data
-backup_data_path: /tmp/s3/redmine-backup.tar.gz
+# Git Directory
+redmine_git_dir: /var/git
 
-# Restore working directory
-backup_data_dir: "{{ working_dir }}/redmine-backup"
+# Archived Redmine media file
+redmine_archived_media_file: files.tar.gz
 
-# Redmine database dump data file name
-pg_dump_file: redmine.psql
+# Redmine media file directory
+redmine_file_dir: /var/lib/redmine/files
 
-# Redmine media files archive file name
-media_file: files.tar.gz
-
-# Git repository data file name
-git_archive_file: git.tar.gz
+# PostgreSQL dumped data file
+redmine_pg_dump_file: redmine.psql

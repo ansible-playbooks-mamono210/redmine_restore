@@ -1,0 +1,36 @@
+---
+- name: Prepare
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install boto3
+      ansible.builtin.include_role:
+        name: mamono210.aws_bootstrap
+
+    - name: Get archived Git data file
+      ansible.builtin.include_role:
+        name: mamono210.aws_s3_get
+      vars:
+        s3_bucket: mamono210
+        s3_object_name: "ansible-playbooks-mamono210/redmine_create-backup/{{ redmine_archived_git_file }}"
+        remote_directory: '/tmp/redmine-backup'
+        remote_file_name: '{{ redmine_archived_git_file }}'
+
+    - name: Get archived media file
+      ansible.builtin.include_role:
+        name: mamono210.aws_s3_get
+      vars:
+        s3_bucket: mamono210
+        s3_object_name: "ansible-playbooks-mamono210/redmine_create-backup/{{ redmine_archived_media_file }}"
+        remote_directory: '/tmp/redmine-backup'
+        remote_file_name: '{{ redmine_archived_media_file }}'
+
+    - name: Get PostgreSQL dumped data file to S3
+      ansible.builtin.include_role:
+        name: mamono210.aws_s3_get
+      vars:
+        s3_bucket: mamono210
+        s3_object_name: "ansible-playbooks-mamono210/redmine_create-backup/{{ redmine_pg_dump_file }}"
+        remote_directory: '/tmp/redmine-backup'
+        remote_file_name: '{{ redmine_pg_dump_file }}'
