@@ -13,7 +13,7 @@
         name: mamono210.aws_s3_get
       vars:
         s3_bucket: mamono210
-        s3_object_name: "ansible-playbooks-mamono210/redmine_create-backup/{{ redmine_archived_git_file }}"
+        s3_object_name: "circleci-gce/redmine/stop/{{ redmine_archived_git_file }}"
         remote_directory: '/tmp/redmine-backup'
         remote_file_name: '{{ redmine_archived_git_file }}'
 
@@ -22,7 +22,7 @@
         name: mamono210.aws_s3_get
       vars:
         s3_bucket: mamono210
-        s3_object_name: "ansible-playbooks-mamono210/redmine_create-backup/{{ redmine_archived_media_file }}"
+        s3_object_name: "circleci-gce/redmine/stop/{{ redmine_archived_media_file }}"
         remote_directory: '/tmp/redmine-backup'
         remote_file_name: '{{ redmine_archived_media_file }}'
 
@@ -31,6 +31,6 @@
         name: mamono210.aws_s3_get
       vars:
         s3_bucket: mamono210
-        s3_object_name: "ansible-playbooks-mamono210/redmine_create-backup/{{ redmine_pg_dump_file }}"
+        s3_object_name: "circleci-gce/redmine/stop/{{ redmine_pg_dump_file }}"
         remote_directory: '/tmp/redmine-backup'
         remote_file_name: '{{ redmine_pg_dump_file }}'
