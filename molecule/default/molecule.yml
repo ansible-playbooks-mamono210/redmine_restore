@@ -3,7 +3,7 @@ driver:
   name: delegated
 platforms:
   - name: ${PLATFORM_NAME}
-    ansible_user: centos
+    ansible_user: ${ANSIBLE_USER}
     image_name: ${AMI_NAME}
     image_owner: ${AMI_OWNER_ID}
     instance_type: ${INSTANCE_TYPE}
@@ -23,7 +23,7 @@ platforms:
     ssh_user: centos
     tag_name: ${TAG_NAME}
     tag_created_by: ${CREATED_BY}
-    volume_size: 20
+    volume_size: 30
     vpc_subnet_id: ${VPC_SUBNET_ID}
 provisioner:
   name: ansible
@@ -31,7 +31,7 @@ provisioner:
     defaults:
       callbacks_enabled: ansible.posix.profile_tasks
   connection_options:
-    ansible_user: centos
+    ansible_user: ${ANSIBLE_USER}
     redmine_archived_git_file: git.tar.gz
     redmine_pg_dump_file: redmine.psql
     redmine_archived_media_file: files.tar.gz

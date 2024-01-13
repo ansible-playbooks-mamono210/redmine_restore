@@ -80,11 +80,23 @@ workflows:
           requires:
             - yamllint
       - molecule-ec2:
-          ansible-user: centos
+          ansible-user: 'centos'
           aws-ami-name: 'redmica_golden-image_centos-stream8-1*'
           aws-ami-owner-id: '808683561341'
-          aws-instance-type: 't3a.medium'
-          aws-resource-name: 'circleci_ansible-playbook_redmine_restore_centos-stream8'
+          aws-instance-type: 't2.medium'
+          aws-resource-name: 'circleci_ansible-playbook_redmine_restore_cs8'
+          aws-vpc-subnet-id: 'subnet-022a704b3061b8b39'
+          circleci-timeout: '20m'
+          molecule-scenario-name: 'default'
+          context: AWS_OPENID_CONNECT_TOKENS
+          requires:
+            - ansible-lint
+      - molecule-ec2:
+          ansible-user: 'ec2-user'
+          aws-ami-name: 'redmica_golden-image_centos-stream9-1*'
+          aws-ami-owner-id: '808683561341'
+          aws-instance-type: 't2.medium'
+          aws-resource-name: 'circleci_ansible-playbook_redmine_restore_cs9'
           aws-vpc-subnet-id: 'subnet-022a704b3061b8b39'
           circleci-timeout: '20m'
           molecule-scenario-name: 'default'
