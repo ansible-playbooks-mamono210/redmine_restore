@@ -33,7 +33,7 @@ provisioner:
   connection_options:
     ansible_user: ${ANSIBLE_USER}
     redmine_archived_git_file: git.tar.gz
-    redmine_pg_dump_file: redmine.psql
+    redmine_pg_dump_file: redmine.sql
     redmine_archived_media_file: files.tar.gz
     redmine_backup_data_dir: /tmp/redmine-backup
     remote_directory: '{{ redmine_backup_data_dir }}'

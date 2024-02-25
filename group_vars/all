@@ -33,7 +33,7 @@ redmine_archived_media_file: files.tar.gz
 redmine_file_dir: /var/lib/redmine/files
 
 # PostgreSQL dumped data file
-redmine_pg_dump_file: redmine.psql
+redmine_pg_dump_file: redmine.sql
 
 # PostgreSQL service name
 redmine_postgresql_service_name: postgresql-14
