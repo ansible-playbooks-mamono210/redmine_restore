@@ -1,6 +1,6 @@
 ---
 driver:
-  name: delegated
+  name: default
 platforms:
   - name: ${PLATFORM_NAME}
     ansible_user: ${ANSIBLE_USER}
