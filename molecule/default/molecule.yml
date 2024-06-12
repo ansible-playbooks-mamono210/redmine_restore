@@ -27,7 +27,7 @@ platforms:
       - device_name: /dev/sda1
         ebs:
           delete_on_termination: yes
-          volume_size: 30
+          volume_size: 40
           volume_type: 'gp3'
     vpc_subnet_id: ${VPC_SUBNET_ID}
 provisioner:
