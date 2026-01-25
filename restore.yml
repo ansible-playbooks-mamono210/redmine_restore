@@ -7,3 +7,4 @@
     - mamono210.redmine_restore_files
     - mamono210.redmine_restore_git
     - mamono210.redmine_restore_postgresql
+    - mamono210.redmine_facts
